@@ -1,18 +1,18 @@
-#Fri Nov 14 08:52:58 GMT-03:00 2025
-base.0=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.11=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.12=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.13=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
-base.2=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
-base.4=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
-base.5=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.6=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.7=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.8=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.9=C\:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+#Fri Nov 14 09:50:44 GMT-03:00 2025
+base.0=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
+base.11=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.12=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.13=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
+base.2=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
+base.4=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
+base.5=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.6=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.7=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.8=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.9=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=9/classes.dex

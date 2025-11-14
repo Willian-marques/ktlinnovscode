@@ -763,23 +763,6 @@
             "outputFile": "com.example.motoboyrecrutamento.app-merged_res-64:/values_values.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "293,57,105,153,201,247,336",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "330,99,147,195,241,287,373"
-                    },
-                    "to": {
-                        "startLines": "6,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "431,1715,1762,1809,1856,1901,1946",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "468,1757,1804,1851,1896,1941,1983"
-                    }
-                },
-                {
                     "source": "C:\\Users\\willi\\.gradle\\caches\\transforms-3\\4116ba5a380e93483d3fbdc6a335960b\\transformed\\startup-runtime-1.1.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -813,23 +796,6 @@
                         "endLines": "529,535,541,544,555",
                         "endColumns": "24,24,24,24,24",
                         "endOffsets": "29946,30190,30437,30570,30982"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,137,241,350,470,582",
-                        "endColumns": "81,103,108,119,111,80",
-                        "endOffsets": "132,236,345,465,577,658"
-                    },
-                    "to": {
-                        "startLines": "169,171,172,173,174,251",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "11745,11901,12005,12114,12234,17533",
-                        "endColumns": "81,103,108,119,111,80",
-                        "endOffsets": "11822,12000,12109,12229,12341,17609"
                     }
                 },
                 {
@@ -903,6 +869,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\ic_launcher_background.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "58",
+                        "endOffsets": "111"
+                    },
+                    "to": {
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "1524",
+                        "endColumns": "58",
+                        "endOffsets": "1578"
+                    }
+                },
+                {
                     "source": "C:\\Users\\willi\\.gradle\\caches\\transforms-3\\51c510beab273c05df4f2134e75bcb69\\transformed\\browser-1.4.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
@@ -917,6 +900,23 @@
                         "startOffsets": "473,531,597,660,1988,2059,10872,11466,11533,11612",
                         "endColumns": "57,65,62,61,70,71,67,66,78,68",
                         "endOffsets": "526,592,655,717,2054,2126,10935,11528,11607,11676"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "30,1,37,31,12,22,5,28,40,33,9,20,39,7,4,29,19,11,6,18,14,15,8,10,24,38,23,36,13,21,27,32",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1438,17,1715,1503,536,1062,162,1320,1850,1585,362,931,1801,258,111,1387,876,483,209,823,669,726,307,427,1171,1762,1116,1672,603,1006,1255,1540",
+                        "endColumns": "63,57,45,35,65,52,45,65,75,59,63,73,47,47,49,49,53,51,47,51,55,63,53,54,54,37,53,41,64,54,63,43",
+                        "endOffsets": "1497,70,1756,1534,597,1110,203,1381,1921,1640,421,1000,1844,301,156,1432,925,530,252,870,720,785,356,477,1221,1795,1165,1709,663,1056,1314,1579"
+                    },
+                    "to": {
+                        "startLines": "124,125,133,136,155,159,161,162,163,164,168,170,177,178,179,240,241,242,247,248,249,250,254,255,256,257,258,259,260,266,269,270",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "7639,7703,8272,8437,10806,11107,11218,11264,11330,11406,11681,11827,12458,12506,12554,16971,17021,17075,17313,17361,17413,17469,17718,17772,17827,17882,17920,17974,18016,18371,18537,18601",
+                        "endColumns": "63,57,45,35,65,52,45,65,75,59,63,73,47,47,49,49,53,51,47,51,55,63,53,54,54,37,53,41,64,54,63,43",
+                        "endOffsets": "7698,7756,8313,8468,10867,11155,11259,11325,11401,11461,11740,11896,12501,12549,12599,17016,17070,17122,17356,17408,17464,17528,17767,17822,17877,17915,17969,18011,18076,18421,18596,18640"
                     }
                 },
                 {
@@ -939,54 +939,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\themes.xml",
+                    "source": "C:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "96",
-                        "endOffsets": "149"
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,137,241,350,470,582",
+                        "endColumns": "81,103,108,119,111,80",
+                        "endOffsets": "132,236,345,465,577,658"
                     },
                     "to": {
-                        "startLines": "292",
-                        "startColumns": "4",
-                        "startOffsets": "19821",
-                        "endColumns": "95",
-                        "endOffsets": "19912"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "30,1,37,31,12,22,5,28,40,33,9,20,39,7,4,29,19,11,6,18,14,15,8,10,24,38,23,36,13,21,27,32",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1438,17,1715,1503,536,1062,162,1320,1850,1585,362,931,1801,258,111,1387,876,483,209,823,669,726,307,427,1171,1762,1116,1672,603,1006,1255,1540",
-                        "endColumns": "63,57,45,35,65,52,45,65,75,59,63,73,47,47,49,49,53,51,47,51,55,63,53,54,54,37,53,41,64,54,63,43",
-                        "endOffsets": "1497,70,1756,1534,597,1110,203,1381,1921,1640,421,1000,1844,301,156,1432,925,530,252,870,720,785,356,477,1221,1795,1165,1709,663,1056,1314,1579"
-                    },
-                    "to": {
-                        "startLines": "124,125,133,136,155,159,161,162,163,164,168,170,177,178,179,240,241,242,247,248,249,250,254,255,256,257,258,259,260,266,269,270",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "7639,7703,8272,8437,10806,11107,11218,11264,11330,11406,11681,11827,12458,12506,12554,16971,17021,17075,17313,17361,17413,17469,17718,17772,17827,17882,17920,17974,18016,18371,18537,18601",
-                        "endColumns": "63,57,45,35,65,52,45,65,75,59,63,73,47,47,49,49,53,51,47,51,55,63,53,54,54,37,53,41,64,54,63,43",
-                        "endOffsets": "7698,7756,8313,8468,10867,11155,11259,11325,11401,11461,11740,11896,12501,12549,12599,17016,17070,17122,17356,17408,17464,17528,17767,17822,17877,17915,17969,18011,18076,18421,18596,18640"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\willi\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\ic_launcher_background.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "58",
-                        "endOffsets": "111"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "1524",
-                        "endColumns": "58",
-                        "endOffsets": "1578"
+                        "startLines": "169,171,172,173,174,251",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "11745,11901,12005,12114,12234,17533",
+                        "endColumns": "81,103,108,119,111,80",
+                        "endOffsets": "11822,12000,12109,12229,12341,17609"
                     }
                 },
                 {
@@ -1095,6 +1061,40 @@
                         "startOffsets": "7418,9513",
                         "endColumns": "67,166",
                         "endOffsets": "7481,9675"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "96",
+                        "endOffsets": "149"
+                    },
+                    "to": {
+                        "startLines": "292",
+                        "startColumns": "4",
+                        "startOffsets": "19821",
+                        "endColumns": "95",
+                        "endOffsets": "19912"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "293,57,105,153,201,247,336",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "330,99,147,195,241,287,373"
+                    },
+                    "to": {
+                        "startLines": "6,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "431,1715,1762,1809,1856,1901,1946",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "468,1757,1804,1851,1896,1941,1983"
                     }
                 },
                 {

@@ -129,19 +129,31 @@ class LoginViewModel : ViewModel() {
             try {
                 _resetPasswordState.value = ResetPasswordState.Loading
                 
-                auth.sendPasswordResetEmail(email).await()
+                // Validar formato do email antes
+                if (email.isBlank()) {
+                    _resetPasswordState.value = ResetPasswordState.Error("Digite um e-mail válido")
+                    return@launch
+                }
                 
-                _resetPasswordState.value = ResetPasswordState.Success
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    _resetPasswordState.value = ResetPasswordState.Error("Formato de e-mail inválido")
+                    return@launch
+                }
+                
+                // Tentar enviar email de recuperação
+                auth.sendPasswordResetEmail(email.trim()).await()
+                
+                _resetPasswordState.value = ResetPasswordState.Success(email.trim())
             } catch (e: Exception) {
                 val errorMessage = when {
                     e.message?.contains("no user record", ignoreCase = true) == true ||
                     e.message?.contains("user not found", ignoreCase = true) == true -> 
-                        "Usuário não encontrado. Verifique o e-mail digitado."
+                        "Este e-mail não está cadastrado no sistema."
                     e.message?.contains("invalid email", ignoreCase = true) == true -> 
                         "E-mail inválido. Verifique o formato do e-mail."
                     e.message?.contains("network", ignoreCase = true) == true -> 
                         "Erro de conexão. Verifique sua internet."
-                    else -> "Erro ao enviar e-mail de recuperação: ${e.message ?: "Erro desconhecido"}"
+                    else -> "Erro ao enviar e-mail: ${e.message ?: "Erro desconhecido"}"
                 }
                 _resetPasswordState.value = ResetPasswordState.Error(errorMessage)
             }
@@ -168,7 +180,7 @@ class LoginViewModel : ViewModel() {
     sealed class ResetPasswordState {
         object Idle : ResetPasswordState()
         object Loading : ResetPasswordState()
-        object Success : ResetPasswordState()
+        data class Success(val email: String) : ResetPasswordState()
         data class Error(val message: String) : ResetPasswordState()
     }
 }

@@ -26,12 +26,13 @@ fun ForgotPasswordScreen(
     viewModel: LoginViewModel = viewModel()
 ) {
     var email by remember { mutableStateOf("") }
+    var emailSent by remember { mutableStateOf(false) }
     val resetPasswordState by viewModel.resetPasswordState.collectAsState()
     
-    // Observar o estado e navegar de volta ao login quando bem-sucedido
+    // Observar o estado e marcar quando o email foi enviado
     LaunchedEffect(resetPasswordState) {
-        if (resetPasswordState is LoginViewModel.ResetPasswordState.Success) {
-            navController.popBackStack()
+        if (resetPasswordState is LoginViewModel.ResetPasswordState.Success && !emailSent) {
+            emailSent = true
         }
     }
     
@@ -74,39 +75,89 @@ fun ForgotPasswordScreen(
             
             Spacer(modifier = Modifier.height(24.dp))
             
-            Button(
-                onClick = { viewModel.resetPassword(email) },
-                modifier = Modifier.fillMaxWidth(),
-                enabled = resetPasswordState !is LoginViewModel.ResetPasswordState.Loading
-            ) {
-                if (resetPasswordState is LoginViewModel.ResetPasswordState.Loading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
+            // Se o email foi enviado, mostrar mensagem e botão para voltar
+            if (emailSent) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
                     )
-                } else {
-                    Text("Enviar E-mail de Recuperação")
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "✓ E-mail enviado com sucesso!",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Enviamos um e-mail para:",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                        Text(
+                            text = (resetPasswordState as? LoginViewModel.ResetPasswordState.Success)?.email ?: email,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Verifique sua caixa de entrada e também a pasta de SPAM. O e-mail pode levar alguns minutos para chegar.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
                 }
-            }
-            
-            // Exibir mensagem de sucesso
-            if (resetPasswordState is LoginViewModel.ResetPasswordState.Success) {
+                
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "E-mail de recuperação enviado com sucesso! Verifique sua caixa de entrada.",
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                
+                Button(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Voltar para o Login")
+                }
+            } else {
+                Button(
+                    onClick = { 
+                        if (email.isNotBlank()) {
+                            viewModel.resetPassword(email)
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = resetPasswordState !is LoginViewModel.ResetPasswordState.Loading && email.isNotBlank()
+                ) {
+                    if (resetPasswordState is LoginViewModel.ResetPasswordState.Loading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    } else {
+                        Text("Enviar E-mail de Recuperação")
+                    }
+                }
             }
             
             // Exibir erro se houver
             if (resetPasswordState is LoginViewModel.ResetPasswordState.Error) {
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = (resetPasswordState as LoginViewModel.ResetPasswordState.Error).message,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Text(
+                        text = (resetPasswordState as LoginViewModel.ResetPasswordState.Error).message,
+                        modifier = Modifier.padding(16.dp),
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
         }
     }
