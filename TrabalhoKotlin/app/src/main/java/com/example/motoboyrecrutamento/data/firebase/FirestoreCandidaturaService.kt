@@ -32,7 +32,7 @@ class FirestoreCandidaturaService {
                 "motoboyEmail" to motoboyEmail,
                 "motoboyTelefone" to motoboyTelefone,
                 "status" to "pendente",
-                "dataCandidatura" to com.google.firebase.Timestamp.now().toString()
+                "dataCandidatura" to com.google.firebase.Timestamp.now()
             )
 
             val docRef = candidaturasCollection.add(candidaturaData).await()
@@ -64,7 +64,9 @@ class FirestoreCandidaturaService {
                         id = doc.id.hashCode().toLong().let { if (it < 0) -it else it },
                         vagaId = doc.getString("vagaId")?.hashCode()?.toLong()?.let { if (it < 0) -it else it } ?: 0,
                         motoboyId = doc.getString("motoboyId")?.hashCode()?.toLong()?.let { if (it < 0) -it else it } ?: 0,
-                        dataCandidatura = doc.getString("dataCandidatura") ?: "",
+                        dataCandidatura = doc.getTimestamp("dataCandidatura")?.toDate()?.let { 
+                            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(it) 
+                        } ?: "",
                         status = doc.getString("status") ?: "pendente",
                         firestoreId = doc.id,
                         motoboyNome = doc.getString("motoboyNome"),
