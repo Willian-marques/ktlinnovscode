@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Motoboy Recrutamento</string>
+    
+    <!-- Login/Cadastro -->
+    <string name="login_title">Bem-vindo</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Senha</string>
+    <string name="login_button">Entrar</string>
+    <string name="register_button">Cadastrar</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="register_title">Criar Conta</string>
+    <string name="name_hint">Nome Completo</string>
+    <string name="confirm_password_hint">Confirmar Senha</string>
+    <string name="select_profile">Selecione seu perfil:</string>
+    <string name="profile_motoboy">Sou Motoboy</string>
+    <string name="profile_restaurante">Sou Restaurante</string>
+    
+    <!-- Restaurante -->
+    <string name="post_vaga">Publicar Vaga</string>
+    <string name="minhas_vagas">Minhas Vagas</string>
+    <string name="gerenciar_candidaturas">Gerenciar Candidaturas</string>
+    <string name="titulo_vaga">Título da Vaga</string>
+    <string name="descricao_vaga">Descrição</string>
+    <string name="salario_vaga">Salário (R$)</string>
+    <string name="requisitos_vaga">Requisitos</string>
+    
+    <!-- Motoboy -->
+    <string name="vagas_disponiveis">Vagas Disponíveis</string>
+    <string name="enviar_candidatura">Enviar Candidatura</string>
+    <string name="meu_perfil">Meu Perfil</string>
+    <string name="anexar_documentos">Anexar Documentos</string>
+    <string name="cnh">CNH</string>
+    <string name="veiculo">Veículo</string>
+    <string name="experiencia">Anos de Experiência</string>
+    
+    <!-- Geral -->
+    <string name="salvar">Salvar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="sair">Sair</string>
+    <string name="loading">Carregando…</string>
+    <string name="error_generic">Ocorreu um erro. Tente novamente.</string>
+</resources>
