@@ -4,8 +4,6 @@ import android.util.Log
 import com.example.motoboyrecrutamento.data.local.Candidatura
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 /**
  * Serviço para gerenciar candidaturas no Firestore
@@ -34,7 +32,7 @@ class FirestoreCandidaturaService {
                 "motoboyEmail" to motoboyEmail,
                 "motoboyTelefone" to motoboyTelefone,
                 "status" to "pendente",
-                "dataCandidatura" to com.google.firebase.Timestamp.now()
+                "dataCandidatura" to com.google.firebase.Timestamp.now().toString()
             )
 
             val docRef = candidaturasCollection.add(candidaturaData).await()
@@ -66,9 +64,7 @@ class FirestoreCandidaturaService {
                         id = doc.id.hashCode().toLong().let { if (it < 0) -it else it },
                         vagaId = doc.getString("vagaId")?.hashCode()?.toLong()?.let { if (it < 0) -it else it } ?: 0,
                         motoboyId = doc.getString("motoboyId")?.hashCode()?.toLong()?.let { if (it < 0) -it else it } ?: 0,
-                        dataCandidatura = doc.getTimestamp("dataCandidatura")?.toDate()?.let { 
-                            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(it) 
-                        } ?: "",
+                        dataCandidatura = doc.getString("dataCandidatura") ?: "",
                         status = doc.getString("status") ?: "pendente",
                         firestoreId = doc.id,
                         motoboyNome = doc.getString("motoboyNome"),

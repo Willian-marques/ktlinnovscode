@@ -18,8 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.motoboyrecrutamento.viewmodel.RestauranteViewModel
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 /**
  * MEMBRO 2 - FASE 4: Tela de Gerenciamento de Candidaturas
@@ -313,12 +311,7 @@ fun GerenciarCandidaturasScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                                 Text(
-                                    text = try {
-                                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(candidatura.dataCandidatura)
-                                        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
-                                    } catch (e: Exception) {
-                                        candidatura.dataCandidatura // Fallback
-                                    },
+                                    text = candidatura.dataCandidatura.take(10),
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Medium
                                 )
