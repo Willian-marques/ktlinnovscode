@@ -48,13 +48,13 @@ O **Motoboy Recrutamento** é um aplicativo Android desenvolvido para conectar *
 
 | ID | Funcionalidade | Descrição | Responsável |
 |----|---------------|-----------|-------------|
-| **RF01** | Cadastro de Usuário | Registro com email, senha e tipo de perfil | MEMBRO 1 |
-| **RF02** | Login | Autenticação com Firebase e redirecionamento por perfil | MEMBRO 1 |
-| **RF03** | Recuperação de Senha | Envio de email de recuperação via Firebase | MEMBRO 1 |
-| **RF04** | Publicar Vaga | Restaurantes criam vagas com título, descrição e salário | MEMBRO 2 |
-| **RF05** | Candidatar-se | Motoboys enviam candidaturas para vagas | MEMBRO 3 |
-| **RF06** | Gerenciar Candidaturas | Restaurantes visualizam e analisam candidatos | MEMBRO 2 |
-| **RF07** | Anexar Documentos | Upload de CNH e documentos no Firebase Storage | MEMBRO 3 |
+| **RF01** | Cadastro de Usuário | Registro com email, senha e tipo de perfil | 
+| **RF02** | Login | Autenticação com Firebase e redirecionamento por perfil | 
+| **RF03** | Recuperação de Senha | Envio de email de recuperação via Firebase | 
+| **RF04** | Publicar Vaga | Restaurantes criam vagas com título, descrição e salário | 
+| **RF05** | Candidatar-se | Motoboys enviam candidaturas para vagas | 
+| **RF06** | Gerenciar Candidaturas | Restaurantes visualizam e analisam candidatos | 
+| **RF07** | Anexar Documentos | Upload de CNH e documentos no Firebase Storage | 
 
 ### Funcionalidades Extras
 
