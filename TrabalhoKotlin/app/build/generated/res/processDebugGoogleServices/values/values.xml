@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">999037085039</string>
+    <string name="google_api_key" translatable="false">AIzaSyAVquZLi_HhGNP7CPCyXAYJyw-mtU3ckLY</string>
+    <string name="google_app_id" translatable="false">1:999037085039:android:2a25cff5727d2304b6b49a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAVquZLi_HhGNP7CPCyXAYJyw-mtU3ckLY</string>
+    <string name="google_storage_bucket" translatable="false">motoboy-recrutamento.firebasestorage.app</string>
+    <string name="project_id" translatable="false">motoboy-recrutamento</string>
+</resources>

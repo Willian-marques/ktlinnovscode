@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="ic_launcher_background">#FF6200EE</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="anexar_documentos">Anexar Documentos</string>
+    <string name="app_name">Motoboy Recrutamento</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cnh">CNH</string>
+    <string name="confirm_password_hint">Confirmar Senha</string>
+    <string name="descricao_vaga">Descrição</string>
+    <string name="email_hint">E-mail</string>
+    <string name="enviar_candidatura">Enviar Candidatura</string>
+    <string name="error_generic">Ocorreu um erro. Tente novamente.</string>
+    <string name="experiencia">Anos de Experiência</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="gcm_defaultSenderId" translatable="false">999037085039</string>
+    <string name="gerenciar_candidaturas">Gerenciar Candidaturas</string>
+    <string name="google_api_key" translatable="false">AIzaSyAVquZLi_HhGNP7CPCyXAYJyw-mtU3ckLY</string>
+    <string name="google_app_id" translatable="false">1:999037085039:android:2a25cff5727d2304b6b49a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAVquZLi_HhGNP7CPCyXAYJyw-mtU3ckLY</string>
+    <string name="google_storage_bucket" translatable="false">motoboy-recrutamento.firebasestorage.app</string>
+    <string name="loading">Carregando…</string>
+    <string name="login_button">Entrar</string>
+    <string name="login_title">Bem-vindo</string>
+    <string name="meu_perfil">Meu Perfil</string>
+    <string name="minhas_vagas">Minhas Vagas</string>
+    <string name="name_hint">Nome Completo</string>
+    <string name="password_hint">Senha</string>
+    <string name="post_vaga">Publicar Vaga</string>
+    <string name="profile_motoboy">Sou Motoboy</string>
+    <string name="profile_restaurante">Sou Restaurante</string>
+    <string name="project_id" translatable="false">motoboy-recrutamento</string>
+    <string name="register_button">Cadastrar</string>
+    <string name="register_title">Criar Conta</string>
+    <string name="requisitos_vaga">Requisitos</string>
+    <string name="sair">Sair</string>
+    <string name="salario_vaga">Salário (R$)</string>
+    <string name="salvar">Salvar</string>
+    <string name="select_profile">Selecione seu perfil:</string>
+    <string name="titulo_vaga">Título da Vaga</string>
+    <string name="vagas_disponiveis">Vagas Disponíveis</string>
+    <string name="veiculo">Veículo</string>
+    <style name="Theme.MotoboyRecrutamento" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>

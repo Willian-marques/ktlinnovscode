@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999037085039",
+    "project_id": "motoboy-recrutamento",
+    "storage_bucket": "motoboy-recrutamento.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999037085039:android:2a25cff5727d2304b6b49a",
+        "android_client_info": {
+          "package_name": "com.example.motoboyrecrutamento"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVquZLi_HhGNP7CPCyXAYJyw-mtU3ckLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

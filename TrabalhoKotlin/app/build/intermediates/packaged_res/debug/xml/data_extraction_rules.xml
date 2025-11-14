@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="FirebaseAppHeartBeat.xml"/>
+        <exclude domain="sharedpref" path="com.google.firebase.messaging.xml"/>
+    </cloud-backup>
+</data-extraction-rules>
