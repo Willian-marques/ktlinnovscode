@@ -46,8 +46,8 @@ O **Motoboy Recrutamento** é um aplicativo Android desenvolvido para conectar *
 
 ### Requisitos Funcionais (RF)
 
-| ID | Funcionalidade | Descrição | Responsável |
-|----|---------------|-----------|-------------|
+| ID | Funcionalidade | Descrição |
+|----|---------------|-----------|
 | **RF01** | Cadastro de Usuário | Registro com email, senha e tipo de perfil | 
 | **RF02** | Login | Autenticação com Firebase e redirecionamento por perfil | 
 | **RF03** | Recuperação de Senha | Envio de email de recuperação via Firebase | 
