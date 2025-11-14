@@ -54,7 +54,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 1.  **Instalar o Android Studio**: Certifique-se de ter o **Android Studio Iguana ou superior** instalado.
 2.  **Clonar o Repositório**:
     ```bash
-    git clone https://github.com/seu-repo/ktlinnovscode.git
+    git clone https://github.com/Willian-marques/ktlinnovscode
     ```
 3.  **Abrir o Projeto**: Abra o projeto no Android Studio.
 4.  **Sincronizar o Gradle**: Aguarde a sincronização automática do Gradle ou force a sincronização.
