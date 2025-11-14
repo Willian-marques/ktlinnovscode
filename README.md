@@ -419,3 +419,11 @@ Este projeto foi desenvolvido para fins acadêmicos na disciplina de **Desenvolv
 Para dúvidas ou sugestões, entre em contato com a equipe através do repositório no GitHub.
 
 **Repositório**: [https://github.com/Willian-marques/ktlinnovscode](https://github.com/Willian-marques/ktlinnovscode)
+
+---
+
+## 😈 Desenvolvedores
+
+Gabriel Kremer
+Willian Marques
+Caio Murilo
