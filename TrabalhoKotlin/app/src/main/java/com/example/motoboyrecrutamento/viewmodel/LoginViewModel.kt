@@ -58,19 +58,24 @@ class LoginViewModel : ViewModel() {
             } catch (e: Exception) {
                 val errorMessage = when {
                     e.message?.contains("no user record", ignoreCase = true) == true ||
-                    e.message?.contains("user not found", ignoreCase = true) == true -> 
+                    e.message?.contains("user not found", ignoreCase = true) == true ||
+                    e.message?.contains("There is no user record", ignoreCase = true) == true -> 
                         "Usuário não encontrado. Verifique o e-mail digitado."
                     e.message?.contains("wrong password", ignoreCase = true) == true ||
                     e.message?.contains("invalid password", ignoreCase = true) == true ||
-                    e.message?.contains("invalid credential", ignoreCase = true) == true -> 
-                        "Senha incorreta. Tente novamente."
-                    e.message?.contains("invalid email", ignoreCase = true) == true -> 
+                    e.message?.contains("invalid credential", ignoreCase = true) == true ||
+                    e.message?.contains("INVALID_LOGIN_CREDENTIALS", ignoreCase = true) == true ||
+                    e.message?.contains("password is invalid", ignoreCase = true) == true -> 
+                        "E-mail ou senha incorretos. Verifique e tente novamente."
+                    e.message?.contains("invalid email", ignoreCase = true) == true ||
+                    e.message?.contains("badly formatted", ignoreCase = true) == true -> 
                         "E-mail inválido. Verifique o formato do e-mail."
                     e.message?.contains("network", ignoreCase = true) == true -> 
                         "Erro de conexão. Verifique sua internet."
-                    e.message?.contains("too many requests", ignoreCase = true) == true -> 
+                    e.message?.contains("too many requests", ignoreCase = true) == true ||
+                    e.message?.contains("TOO_MANY_ATTEMPTS", ignoreCase = true) == true -> 
                         "Muitas tentativas. Tente novamente mais tarde."
-                    else -> "Erro ao fazer login: ${e.message ?: "Erro desconhecido"}"
+                    else -> "Erro ao fazer login. Verifique suas credenciais e tente novamente."
                 }
                 _loginState.value = LoginState.Error(errorMessage)
             }
@@ -106,15 +111,18 @@ class LoginViewModel : ViewModel() {
             } catch (e: Exception) {
                 val errorMessage = when {
                     e.message?.contains("email address is already", ignoreCase = true) == true ||
-                    e.message?.contains("email-already-in-use", ignoreCase = true) == true -> 
+                    e.message?.contains("email-already-in-use", ignoreCase = true) == true ||
+                    e.message?.contains("EMAIL_EXISTS", ignoreCase = true) == true -> 
                         "Este e-mail já está cadastrado. Tente fazer login."
-                    e.message?.contains("weak password", ignoreCase = true) == true -> 
+                    e.message?.contains("weak password", ignoreCase = true) == true ||
+                    e.message?.contains("WEAK_PASSWORD", ignoreCase = true) == true -> 
                         "Senha muito fraca. Use no mínimo 6 caracteres."
-                    e.message?.contains("invalid email", ignoreCase = true) == true -> 
+                    e.message?.contains("invalid email", ignoreCase = true) == true ||
+                    e.message?.contains("badly formatted", ignoreCase = true) == true -> 
                         "E-mail inválido. Verifique o formato do e-mail."
                     e.message?.contains("network", ignoreCase = true) == true -> 
                         "Erro de conexão. Verifique sua internet."
-                    else -> "Erro ao criar conta: ${e.message ?: "Erro desconhecido"}"
+                    else -> "Erro ao criar conta. Verifique os dados e tente novamente."
                 }
                 _registerState.value = RegisterState.Error(errorMessage)
             }
@@ -147,13 +155,15 @@ class LoginViewModel : ViewModel() {
             } catch (e: Exception) {
                 val errorMessage = when {
                     e.message?.contains("no user record", ignoreCase = true) == true ||
-                    e.message?.contains("user not found", ignoreCase = true) == true -> 
+                    e.message?.contains("user not found", ignoreCase = true) == true ||
+                    e.message?.contains("There is no user record", ignoreCase = true) == true -> 
                         "Este e-mail não está cadastrado no sistema."
-                    e.message?.contains("invalid email", ignoreCase = true) == true -> 
+                    e.message?.contains("invalid email", ignoreCase = true) == true ||
+                    e.message?.contains("badly formatted", ignoreCase = true) == true -> 
                         "E-mail inválido. Verifique o formato do e-mail."
                     e.message?.contains("network", ignoreCase = true) == true -> 
                         "Erro de conexão. Verifique sua internet."
-                    else -> "Erro ao enviar e-mail: ${e.message ?: "Erro desconhecido"}"
+                    else -> "Erro ao enviar e-mail de recuperação. Tente novamente."
                 }
                 _resetPasswordState.value = ResetPasswordState.Error(errorMessage)
             }
