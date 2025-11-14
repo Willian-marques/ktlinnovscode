@@ -99,11 +99,14 @@ class CandidaturaRepository(
             val motoboy = motoboyDao.getMotoboyByIdSync(motoboyId)
                 ?: return Result.failure(Exception("Motoboy não encontrado"))
             
-            // 2. Buscar dados do usuário do motoboy
-            val usuario = usuarioDao.getUsuarioByIdSync(motoboy.usuarioId)
-                ?: return Result.failure(Exception("Usuário do motoboy não encontrado"))
+            // 2. Pegar dados do Firebase Auth (usuário atual)
+            val currentUser = auth.currentUser
+                ?: return Result.failure(Exception("Usuário não autenticado"))
             
-            Log.d("CandidaturaRepository", "Motoboy/Usuário encontrado: ${usuario.nome}")
+            val motoboyNome = currentUser.displayName ?: "Sem nome"
+            val motoboyEmail = currentUser.email ?: "Sem email"
+            
+            Log.d("CandidaturaRepository", "Motoboy encontrado: $motoboyNome")
             
             // 3. Buscar dados da vaga para pegar o firestoreId
             val vaga = vagaDao.getVagaByIdSync(vagaId)
@@ -114,16 +117,12 @@ class CandidaturaRepository(
             
             Log.d("CandidaturaRepository", "Vaga encontrada: firestoreId=$vagaFirestoreId")
             
-            // 4. Pegar UID do Firebase Auth
-            val motoboyFirebaseId = auth.currentUser?.uid
-                ?: return Result.failure(Exception("Usuário não autenticado"))
-            
-            // 5. Salvar no Firestore
+            // 4. Salvar no Firestore
             val firestoreResult = firestoreService.createCandidatura(
                 vagaId = vagaFirestoreId,
-                motoboyId = motoboyFirebaseId,
-                motoboyNome = usuario.nome,
-                motoboyEmail = usuario.email,
+                motoboyId = currentUser.uid,
+                motoboyNome = motoboyNome,
+                motoboyEmail = motoboyEmail,
                 motoboyTelefone = motoboy.telefone
             )
             
@@ -146,8 +145,8 @@ class CandidaturaRepository(
                 dataCandidatura = dataCandidatura,
                 status = "pendente",
                 firestoreId = firestoreId,
-                motoboyNome = usuario.nome,
-                motoboyEmail = usuario.email,
+                motoboyNome = motoboyNome,
+                motoboyEmail = motoboyEmail,
                 motoboyTelefone = motoboy.telefone
             )
 
