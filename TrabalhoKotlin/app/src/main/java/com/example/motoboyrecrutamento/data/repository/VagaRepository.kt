@@ -141,8 +141,6 @@ class VagaRepository(
                 restauranteId = restauranteId
             )
 
-            vagaDao.insert(vaga)
-
             Result.success(vaga)
         } catch (e: Exception) {
             Result.failure(e)
