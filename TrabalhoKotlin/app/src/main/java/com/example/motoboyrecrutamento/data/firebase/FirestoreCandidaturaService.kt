@@ -4,6 +4,8 @@ import android.util.Log
 import com.example.motoboyrecrutamento.data.local.Candidatura
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * Serviço para gerenciar candidaturas no Firestore
