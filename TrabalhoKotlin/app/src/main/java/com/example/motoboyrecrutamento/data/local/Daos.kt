@@ -122,7 +122,7 @@ interface CandidaturaDao {
     @Query("SELECT * FROM candidaturas WHERE vagaId = :vagaId AND motoboyId = :motoboyId LIMIT 1")
     suspend fun getCandidaturaByVagaAndMotoboy(vagaId: Long, motoboyId: Long): Candidatura?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(candidatura: Candidatura): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

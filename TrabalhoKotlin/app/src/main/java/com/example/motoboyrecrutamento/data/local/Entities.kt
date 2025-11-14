@@ -77,10 +77,12 @@ data class Vaga(
  * MEMBRO 3: Entidade Candidatura
  * Armazena o cache das candidaturas do motoboy logado
  */
-@Entity(tableName = "candidaturas")
+@Entity(
+    tableName = "candidaturas",
+    primaryKeys = ["vagaId", "motoboyId"] // Chave primária composta
+)
 data class Candidatura(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Long = 0, // ID interno (não mais PK)
     val vagaId: Long, // Foreign key para Vaga
     val motoboyId: Long, // Foreign key para Motoboy
     val dataCandidatura: String, // LocalDateTime serializado
