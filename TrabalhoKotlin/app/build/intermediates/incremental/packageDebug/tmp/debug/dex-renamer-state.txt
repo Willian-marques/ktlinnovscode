@@ -1,4 +1,4 @@
-#Fri Nov 14 09:50:44 GMT-03:00 2025
+#Fri Nov 14 09:55:35 GMT-03:00 2025
 base.0=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\willi\\Desktop\\ktlinnovscode\\TrabalhoKotlin\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex

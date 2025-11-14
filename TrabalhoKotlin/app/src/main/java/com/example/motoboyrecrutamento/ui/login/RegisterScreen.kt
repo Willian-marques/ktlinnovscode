@@ -69,12 +69,26 @@ fun RegisterScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Criar Conta") },
+                title = { 
+                    Column {
+                        Text("Criar Conta", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                            "Junte-se a nós",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar"
+                            contentDescription = "Voltar",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }
@@ -154,48 +168,95 @@ fun RegisterScreen(
             
             Spacer(modifier = Modifier.height(24.dp))
             
-            Text(
-                text = "Selecione seu perfil:",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.align(Alignment.Start)
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            Row(
+            // Card com seleção de perfil
+            Card(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
             ) {
-                Row(
+                Column(
                     modifier = Modifier
-                        .selectable(
-                            selected = selectedProfile == "motoboy",
-                            onClick = { selectedProfile = "motoboy" }
-                        )
-                        .padding(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .fillMaxWidth()
+                        .padding(16.dp)
                 ) {
-                    RadioButton(
-                        selected = selectedProfile == "motoboy",
-                        onClick = { selectedProfile = "motoboy" }
+                    Text(
+                        text = "Selecione seu perfil:",
+                        style = MaterialTheme.typography.titleMedium
                     )
-                    Text("Sou Motoboy", modifier = Modifier.padding(start = 8.dp))
-                }
-                
-                Row(
-                    modifier = Modifier
-                        .selectable(
-                            selected = selectedProfile == "restaurante",
-                            onClick = { selectedProfile = "restaurante" }
-                        )
-                        .padding(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RadioButton(
-                        selected = selectedProfile == "restaurante",
-                        onClick = { selectedProfile = "restaurante" }
-                    )
-                    Text("Sou Restaurante", modifier = Modifier.padding(start = 8.dp))
+                    
+                    Spacer(modifier = Modifier.height(12.dp))
+                    
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        ElevatedCard(
+                            modifier = Modifier
+                                .weight(1f)
+                                .selectable(
+                                    selected = selectedProfile == "motoboy",
+                                    onClick = { selectedProfile = "motoboy" }
+                                ),
+                            colors = CardDefaults.elevatedCardColors(
+                                containerColor = if (selectedProfile == "motoboy")
+                                    MaterialTheme.colorScheme.primaryContainer
+                                else
+                                    MaterialTheme.colorScheme.surface
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "🏍️",
+                                    style = MaterialTheme.typography.displaySmall
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    "Motoboy",
+                                    style = MaterialTheme.typography.titleSmall
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.width(12.dp))
+                        
+                        ElevatedCard(
+                            modifier = Modifier
+                                .weight(1f)
+                                .selectable(
+                                    selected = selectedProfile == "restaurante",
+                                    onClick = { selectedProfile = "restaurante" }
+                                ),
+                            colors = CardDefaults.elevatedCardColors(
+                                containerColor = if (selectedProfile == "restaurante")
+                                    MaterialTheme.colorScheme.primaryContainer
+                                else
+                                    MaterialTheme.colorScheme.surface
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "🍽️",
+                                    style = MaterialTheme.typography.displaySmall
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    "Restaurante",
+                                    style = MaterialTheme.typography.titleSmall
+                                )
+                            }
+                        }
+                    }
                 }
             }
             
@@ -224,21 +285,37 @@ fun RegisterScreen(
             // Exibir erro se houver
             if (registerState is LoginViewModel.RegisterState.Error) {
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = (registerState as LoginViewModel.RegisterState.Error).message,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Text(
+                        text = (registerState as LoginViewModel.RegisterState.Error).message,
+                        modifier = Modifier.padding(16.dp),
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
             
             // Validação de senha
             if (password.isNotEmpty() && confirmPassword.isNotEmpty() && password != confirmPassword) {
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "As senhas não coincidem",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Text(
+                        text = "⚠️ As senhas não coincidem",
+                        modifier = Modifier.padding(12.dp),
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
         }
     }

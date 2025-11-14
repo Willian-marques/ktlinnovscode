@@ -42,12 +42,25 @@ fun MotoboyHomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Vagas Disponíveis") },
+                title = { 
+                    Column {
+                        Text("Vagas Disponíveis", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                            "Encontre sua próxima oportunidade",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ),
                 actions = {
                     TextButton(onClick = {
                         navController.navigate("motoboy_perfil")
                     }) {
-                        Text("Perfil")
+                        Text("Perfil", color = MaterialTheme.colorScheme.onPrimaryContainer)
                     }
                     TextButton(onClick = {
                         FirebaseAuth.getInstance().signOut()
@@ -55,7 +68,7 @@ fun MotoboyHomeScreen(
                             popUpTo(0) { inclusive = true }
                         }
                     }) {
-                        Text("Sair")
+                        Text("Sair", color = MaterialTheme.colorScheme.onPrimaryContainer)
                     }
                 }
             )
@@ -74,47 +87,148 @@ fun MotoboyHomeScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .padding(32.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Nenhuma vaga disponível no momento.")
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = "🔍",
+                            style = MaterialTheme.typography.displayLarge
+                        )
+                        Text(
+                            text = "Nenhuma vaga disponível",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Text(
+                            text = "No momento não há vagas abertas. Continue verificando!",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
             }
         } else {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items(vagas) { vaga ->
+                // Header com contador
+                item {
                     Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "${vagas.size}",
+                                style = MaterialTheme.typography.displaySmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Text(
+                                text = if (vagas.size == 1) "Vaga Disponível" else "Vagas Disponíveis",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    }
+                }
+                
+                items(vagas) { vaga ->
+                    ElevatedCard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                // Navegar para detalhes da vaga
                                 navController.navigate("vaga_detalhes/${vaga.id}")
-                            }
+                            },
+                        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp)
                     ) {
                         Column(
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            Text(
-                                text = vaga.titulo,
-                                style = MaterialTheme.typography.titleMedium
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = vaga.titulo,
+                                    style = MaterialTheme.typography.titleLarge,
+                                    modifier = Modifier.weight(1f)
+                                )
+                                Surface(
+                                    shape = MaterialTheme.shapes.medium,
+                                    color = MaterialTheme.colorScheme.primaryContainer
+                                ) {
+                                    Text(
+                                        text = "ABERTA",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                }
+                            }
+                            
                             Text(
                                 text = vaga.descricao,
                                 style = MaterialTheme.typography.bodyMedium,
-                                maxLines = 2
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 3
                             )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = "Salário: R$ ${String.format("%.2f", vaga.salario)}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.primary
-                            )
+                            
+                            HorizontalDivider()
+                            
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column {
+                                    Text(
+                                        text = "💰 Salário Oferecido",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = "R$ ${String.format("%.2f", vaga.salario)}",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                                
+                                FilledTonalButton(
+                                    onClick = {
+                                        navController.navigate("vaga_detalhes/${vaga.id}")
+                                    }
+                                ) {
+                                    Text("Ver Detalhes")
+                                }
+                            }
                         }
                     }
                 }
