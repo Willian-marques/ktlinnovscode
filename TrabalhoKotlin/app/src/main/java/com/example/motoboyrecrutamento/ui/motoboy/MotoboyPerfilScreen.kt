@@ -134,13 +134,15 @@ fun MotoboyPerfilScreen(
             OutlinedTextField(
                 value = telefone,
                 onValueChange = { newValue ->
+                    // Apenas permitir dígitos e limitar a 11
                     val digits = newValue.filter { it.isDigit() }
                     if (digits.length <= 11) {
-                        telefone = formatPhoneNumber(digits)
+                        telefone = digits
                     }
                 },
                 label = { Text("Telefone (DDD + Número)") },
-                placeholder = { Text("(11) 98765-4321") },
+                placeholder = { Text("11987654321") },
+                supportingText = { Text("Digite apenas números (ex: 11987654321)") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
