@@ -407,21 +407,6 @@ O projeto utiliza Firebase como backend, sem necessidade de API REST customizada
 
 ---
 
-## 👨‍💻 Equipe de Desenvolvimento
-
-| Nome | Responsabilidades | GitHub |
-|------|-------------------|--------|
-| **Willian Marques** | RF01, RF02, RF03 (Autenticação) | [@Willian-marques](https://github.com/Willian-marques) |
-| **Caio Murilo** | RF04, RF06 (Restaurante) | - |
-| **Gabriel Kremer** | RF05, RF07 (Motoboy) | - |
-
----
-
-## 📱 Screenshots
-
-_(Espaço reservado para capturas de tela do aplicativo)_
-
----
 
 ## 📄 Licença
 
