@@ -18,6 +18,27 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.motoboyrecrutamento.viewmodel.RestauranteViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
+
+/**
+ * Formata a data de candidatura para exibição
+ */
+fun formatarData(dataCandidatura: String): String {
+    return try {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd/MM/yyyy 'às' HH:mm", Locale.getDefault())
+        val date = inputFormat.parse(dataCandidatura)
+        if (date != null) {
+            outputFormat.format(date)
+        } else {
+            dataCandidatura
+        }
+    } catch (e: Exception) {
+        // Se falhar, retorna apenas a data
+        dataCandidatura.take(10)
+    }
+}
 
 /**
  * MEMBRO 2 - FASE 4: Tela de Gerenciamento de Candidaturas
@@ -305,16 +326,18 @@ fun GerenciarCandidaturasScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(
-                                    text = "📅 Candidatura enviada em:",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = candidatura.dataCandidatura.take(10),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
+                                Column {
+                                    Text(
+                                        text = "📅 Candidatura enviada",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = formatarData(candidatura.dataCandidatura),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
                             }
 
                             // Botão para ver perfil completo

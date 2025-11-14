@@ -95,6 +95,13 @@ class CandidaturaRepository(
         return try {
             Log.d("CandidaturaRepository", "Enviando candidatura: vagaId=$vagaId, motoboyId=$motoboyId")
             
+            // Verificar se já existe candidatura (chave primária composta)
+            val candidaturaExistente = candidaturaDao.getCandidaturaByVagaAndMotoboy(vagaId, motoboyId)
+            if (candidaturaExistente != null) {
+                Log.d("CandidaturaRepository", "Candidatura já existe, retornando a existente")
+                return Result.success(candidaturaExistente)
+            }
+            
             // 1. Buscar dados do motoboy
             val motoboy = motoboyDao.getMotoboyByIdSync(motoboyId)
                 ?: return Result.failure(Exception("Motoboy não encontrado"))
@@ -134,12 +141,12 @@ class CandidaturaRepository(
             val firestoreId = firestoreResult.getOrNull()!!
             Log.d("CandidaturaRepository", "Candidatura salva no Firestore com ID: $firestoreId")
             
-            // 6. Salvar no cache local
+            // 5. Salvar no cache local (única vez)
             val dataCandidatura = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 .format(Date())
             
             val candidatura = Candidatura(
-                id = 0, // Room vai gerar
+                id = System.currentTimeMillis(), // Usar timestamp como ID único
                 vagaId = vagaId,
                 motoboyId = motoboyId,
                 dataCandidatura = dataCandidatura,
@@ -186,9 +193,19 @@ class CandidaturaRepository(
             val candidaturas = firestoreResult.getOrNull()!!
             Log.d("CandidaturaRepository", "Encontradas ${candidaturas.size} candidaturas no Firestore")
             
-            // Salvar no cache local
+            // Salvar no cache local SOMENTE se não existir
             candidaturas.forEach { candidatura ->
-                candidaturaDao.insert(candidatura)
+                val existente = candidaturaDao.getCandidaturaByVagaAndMotoboy(
+                    candidatura.vagaId,
+                    candidatura.motoboyId
+                )
+                
+                if (existente == null) {
+                    candidaturaDao.insert(candidatura)
+                    Log.d("CandidaturaRepository", "Nova candidatura inserida: ${candidatura.motoboyNome}")
+                } else {
+                    Log.d("CandidaturaRepository", "Candidatura já existe, pulando: ${candidatura.motoboyNome}")
+                }
             }
             
             Log.d("CandidaturaRepository", "Candidaturas sincronizadas com sucesso")

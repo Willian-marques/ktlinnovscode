@@ -15,6 +15,7 @@ import com.example.motoboyrecrutamento.data.repository.CandidaturaRepository
 import com.example.motoboyrecrutamento.data.local.Candidatura
 import com.example.motoboyrecrutamento.data.local.Vaga
 import com.example.motoboyrecrutamento.data.local.Motoboy
+import com.example.motoboyrecrutamento.data.firebase.FirestoreMotoboyService
 
 
 
@@ -46,6 +47,7 @@ class RestauranteViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private val auth = FirebaseAuth.getInstance()
+    private val firestoreMotoboyService = FirestoreMotoboyService()
     
     // ID único do restaurante logado baseado no Firebase Auth UID
     private val restauranteId: String
@@ -161,12 +163,21 @@ class RestauranteViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
             try {
                 println("DEBUG: Tentando carregar motoboy com ID: $motoboyId")
-                val motoboy = database.motoboyDao().getMotoboyByIdSync(motoboyId)
-                println("DEBUG: Motoboy encontrado: $motoboy")
-                _motoboyDetalhes.value = motoboy
                 
-                if (motoboy == null) {
+                // Primeiro buscar do banco local
+                val motoboy = database.motoboyDao().getMotoboyByIdSync(motoboyId)
+                println("DEBUG: Motoboy encontrado no banco local: $motoboy")
+                
+                if (motoboy != null) {
+                    _motoboyDetalhes.value = motoboy
+                    
+                    // Tentar sincronizar do Firestore em background
+                    // O motoboyId local não é o mesmo que o Firebase UID
+                    // Precisamos buscar pelo usuarioId que é o hash do Firebase UID
+                    // Por isso, vamos apenas usar o que já temos localmente
+                } else {
                     println("ERRO: Motoboy não encontrado no banco local. ID: $motoboyId")
+                    _motoboyDetalhes.value = null
                 }
             } catch (e: Exception) {
                 println("ERRO ao carregar motoboy: ${e.message}")

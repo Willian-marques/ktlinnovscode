@@ -2,6 +2,7 @@ package com.example.motoboyrecrutamento.viewmodel
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.motoboyrecrutamento.data.local.AppDatabase
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import com.example.motoboyrecrutamento.data.local.Vaga
+import com.example.motoboyrecrutamento.data.firebase.FirestoreMotoboyService
 
 
 /**
@@ -42,6 +44,7 @@ class MotoboyViewModel(application: Application) : AndroidViewModel(application)
     
     private val storage = FirebaseStorage.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private val firestoreMotoboyService = FirestoreMotoboyService()
     
     // ID único do motoboy - busca do banco ou 0 se não encontrado
     private var _motoboyIdCache: Long? = null
@@ -223,14 +226,60 @@ class MotoboyViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
-     * Carrega os dados do perfil do motoboy
+     * Carrega os dados do perfil do motoboy (sincroniza do Firestore)
      */
     fun loadPerfil() {
         viewModelScope.launch {
             try {
-                val motoboyId = getMotoboyId()
-                val motoboy = database.motoboyDao().getMotoboyByIdSync(motoboyId)
-                _motoboyPerfil.value = motoboy
+                val firebaseUid = auth.currentUser?.uid
+                if (firebaseUid == null) {
+                    _motoboyPerfil.value = null
+                    return@launch
+                }
+                
+                // Buscar do Firestore primeiro
+                val firestoreResult = firestoreMotoboyService.getMotoboy(firebaseUid)
+                
+                if (firestoreResult.isSuccess) {
+                    val firestoreData = firestoreResult.getOrNull()
+                    
+                    if (firestoreData != null) {
+                        // Atualizar banco local com dados do Firestore
+                        val motoboyId = getMotoboyId()
+                        val uidHash = firebaseUid.hashCode().toLong().let { if (it < 0) -it else it }
+                        
+                        val motoboyAtualizado = Motoboy(
+                            id = if (motoboyId > 0) motoboyId else 0,
+                            usuarioId = uidHash,
+                            cnh = firestoreData["cnh"] as? String ?: "",
+                            telefone = firestoreData["telefone"] as? String ?: "",
+                            veiculo = firestoreData["veiculo"] as? String ?: "",
+                            experienciaAnos = (firestoreData["experienciaAnos"] as? Long)?.toInt() ?: 0,
+                            raioAtuacao = (firestoreData["raioAtuacao"] as? Double) ?: 0.0
+                        )
+                        
+                        if (motoboyId > 0) {
+                            database.motoboyDao().update(motoboyAtualizado)
+                        } else {
+                            val newId = database.motoboyDao().insert(motoboyAtualizado)
+                            _motoboyIdCache = newId
+                            _motoboyPerfil.value = motoboyAtualizado.copy(id = newId)
+                            return@launch
+                        }
+                        
+                        _motoboyPerfil.value = motoboyAtualizado
+                    } else {
+                        // Não existe no Firestore, buscar do banco local
+                        val motoboyId = getMotoboyId()
+                        val motoboy = database.motoboyDao().getMotoboyByIdSync(motoboyId)
+                        _motoboyPerfil.value = motoboy
+                    }
+                } else {
+                    // Erro ao buscar do Firestore, buscar do banco local
+                    val motoboyId = getMotoboyId()
+                    val motoboy = database.motoboyDao().getMotoboyByIdSync(motoboyId)
+                    _motoboyPerfil.value = motoboy
+                }
             } catch (e: Exception) {
                 _motoboyPerfil.value = null
             }
@@ -238,15 +287,25 @@ class MotoboyViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
-     * Salva ou atualiza o perfil do motoboy
+     * Salva ou atualiza o perfil do motoboy (local e Firestore)
      */
     fun salvarPerfil(cnh: String, telefone: String, veiculo: String, experienciaAnos: Int, raioAtuacao: Double) {
         viewModelScope.launch {
             try {
                 _perfilSaveState.value = PerfilSaveState.Loading
                 
+                val firebaseUid = auth.currentUser?.uid
+                val firebaseUser = auth.currentUser
+                
+                if (firebaseUid == null || firebaseUser == null) {
+                    _perfilSaveState.value = PerfilSaveState.Error("Usuário não autenticado")
+                    return@launch
+                }
+                
                 val motoboyId = getMotoboyId()
                 val motoboyAtual = database.motoboyDao().getMotoboyByIdSync(motoboyId)
+                
+                val uidHash = firebaseUid.hashCode().toLong().let { if (it < 0) -it else it }
                 
                 if (motoboyAtual != null) {
                     // Atualizar motoboy existente
@@ -262,9 +321,6 @@ class MotoboyViewModel(application: Application) : AndroidViewModel(application)
                     _motoboyPerfil.value = motoboyAtualizado
                 } else {
                     // Criar novo motoboy - deixa o Room gerar o ID automaticamente
-                    val firebaseUid = auth.currentUser?.uid ?: ""
-                    val uidHash = firebaseUid.hashCode().toLong().let { if (it < 0) -it else it }
-                    
                     val novoMotoboy = Motoboy(
                         id = 0, // Room vai gerar o ID automaticamente
                         usuarioId = uidHash, // Usa hash do Firebase UID como usuarioId
@@ -279,7 +335,26 @@ class MotoboyViewModel(application: Application) : AndroidViewModel(application)
                     _motoboyPerfil.value = novoMotoboy.copy(id = newId)
                 }
                 
-                _perfilSaveState.value = PerfilSaveState.Success
+                // Salvar no Firestore
+                val firestoreResult = firestoreMotoboyService.saveMotoboy(
+                    motoboyId = firebaseUid,
+                    nome = firebaseUser.displayName ?: "Nome não informado",
+                    email = firebaseUser.email ?: "",
+                    cnh = cnh,
+                    telefone = telefone,
+                    veiculo = veiculo,
+                    experienciaAnos = experienciaAnos,
+                    raioAtuacao = raioAtuacao
+                )
+                
+                if (firestoreResult.isFailure) {
+                    Log.e("MotoboyViewModel", "Erro ao salvar no Firestore: ${firestoreResult.exceptionOrNull()?.message}")
+                    _perfilSaveState.value = PerfilSaveState.Error(
+                        "Perfil salvo localmente, mas falhou ao sincronizar com o servidor"
+                    )
+                } else {
+                    _perfilSaveState.value = PerfilSaveState.Success
+                }
             } catch (e: Exception) {
                 _perfilSaveState.value = PerfilSaveState.Error(e.message ?: "Erro ao salvar perfil")
             }
